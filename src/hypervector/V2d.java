@@ -185,7 +185,7 @@ public class V2d {
      * @return the vector projection of v1 onto v2. (proj<sub>v1</sub>v2).
      */
     public static double[] vecProjection(double[] v1, double[] v2) {
-        return getScaled(v2, dot(v1, v2)/getSquaredLength(v2));
+        return getScaled(v2, dot(v1, v2) / getSquaredLength(v2));
     }
 
     /**
@@ -194,7 +194,9 @@ public class V2d {
      * @param v the vector to copy.
      * @return a copy of v.
      */
-    public static double[] getCopy(double[] v){ return v.clone(); };
+    public static double[] getCopy(double[] v) {
+        return v.clone();
+    };
 
     /**
      * @param v a vector.
@@ -205,8 +207,27 @@ public class V2d {
         return String.format("new double[]{%f, %f};", v[0], v[1]);
     }
 
-    public static String toString(double[] v ) {
+    public static String toString(double[] v) {
         return String.format("[%f, %f]", v[0], v[1]);
+    }
+
+    /**
+     * Checks to see whether v1 equals v2 within a given tolerance.
+     * 
+     * @param v1 a vector.
+     * @param v2 another vector.
+     * @param TOL the tolerance under which v1 and v2 are considered equal.
+     * @return whether v1 &#8773; v2 under a certain tolerance.
+     */
+    public static boolean tolEquals(double[] v1, double[] v2, double TOL) {
+        double xDif = v1[0] - v2[0];
+        double yDif = v1[1] - v2[1];
+
+        // Make both positive.
+        xDif = xDif < 0 ? -xDif : xDif;
+        yDif = yDif < 0 ? -yDif : yDif;
+
+        return (xDif < TOL) && (yDif < TOL);
     }
 
 }
