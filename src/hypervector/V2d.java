@@ -64,7 +64,7 @@ public class V2d {
      * @return the dot product of v1 and v2. (v1 &#183; v2)
      */
     public static double dot(double[] v1, double[] v2) {
-        return (v1[0] * v2[0]) + (v1[1] + v2[1]);
+        return (v1[0] * v2[0]) + (v1[1] * v2[1]);
     }
 
     /**
@@ -143,8 +143,7 @@ public class V2d {
      * @return a scaled copy of v.
      */
     public static double[] getScaled(double[] v, double mul) {
-        // TODO
-        return ORIGIN;
+        return new double[] { v[0] * mul, v[1] * mul };
     }
 
     /**
@@ -154,7 +153,8 @@ public class V2d {
      * @param mul the value to scale v by.
      */
     public static void scaleBy(double[] v, double mul) {
-        // TODO
+        v[0] *= mul;
+        v[1] *= mul;
     }
 
     /**
@@ -163,7 +163,8 @@ public class V2d {
      * @param v a vector.
      */
     public static void negate(double[] v) {
-        // TODO
+        v[0] = -v[0];
+        v[1] = -v[1];
     }
 
     /**
@@ -173,8 +174,7 @@ public class V2d {
      * @return a negated copy of v.
      */
     public static double[] getNegated(double[] v) {
-        // TODO
-        return ORIGIN;
+        return new double[] { -v[0], -v[1] };
     }
 
     /**
@@ -184,9 +184,8 @@ public class V2d {
      * @param v2 the vector onto which v1 is projected.
      * @return the vector projection of v1 onto v2. (proj<sub>v1</sub>v2).
      */
-    public static double[] VecProjection(double[] v1, double[] v2) {
-        // TODO
-        return ORIGIN;
+    public static double[] vecProjection(double[] v1, double[] v2) {
+        return getScaled(v2, dot(v1, v2)/getSquaredLength(v2));
     }
 
     /**
@@ -195,9 +194,7 @@ public class V2d {
      * @param v the vector to copy.
      * @return a copy of v.
      */
-    public static double[] getCopy(double[] v) {
-        return new double[] { v[0], v[1] };
-    }
+    public static double[] getCopy(double[] v){ return v.clone(); };
 
     /**
      * @param v a vector.
@@ -206,6 +203,10 @@ public class V2d {
      */
     public static String repr(double[] v) {
         return String.format("new double[]{%f, %f};", v[0], v[1]);
+    }
+
+    public static String toString(double[] v ) {
+        return String.format("[%f, %f]", v[0], v[1]);
     }
 
 }
